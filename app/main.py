@@ -57,6 +57,7 @@ Fetch Response (Version: 16) => throttle_time_ms error_code session_id [response
 
 
 def prepare_body_for_fetch(data):
+    parse_fetch_request(data)
     body = b""
     body += int(0).to_bytes(4, byteorder="big") # throttle
     body += int(0).to_bytes(2, byteorder="big") # error code 
