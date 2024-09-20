@@ -19,7 +19,7 @@ def main():
             correlation_id = struct.pack('>I', 7)
 
             response = message_length + correlation_id
-            conn.sendall(response)
+            clientsocket.sendall(response)
             print(f"response sent: {response}")
 
 
