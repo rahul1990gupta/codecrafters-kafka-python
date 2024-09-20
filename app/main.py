@@ -5,7 +5,7 @@ import struct
 SUPPORTED_VERSIONS = {0, 1, 2, 3, 4}
 ERROR_CODE_UNSUPPORTED_VERSION = 35  # Error code for unsupported version
 
-def handle_client(clientsocket):
+async def handle_client(clientsocket):
     while True:
         data = clientsocket.recv(1024)
         print(data)
