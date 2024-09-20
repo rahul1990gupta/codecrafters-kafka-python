@@ -58,7 +58,7 @@ def main():
         (clientsocket, address)  = server.accept() # wait for client
         if clientsocket:
             print(f"connect by {address}")
-            client_thread = threading.Thread(target=handle_client, args=(clientsocket, addr))
+            client_thread = threading.Thread(target=handle_client, args=(clientsocket, address))
             client_thread.start()  # Start the thread
 
 if __name__ == "__main__":
