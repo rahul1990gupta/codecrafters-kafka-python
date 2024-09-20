@@ -15,8 +15,8 @@ def main():
         print(f"connect by {address}")
         data = clientsocket.recv(1024)
         if data:
-            message_length = struct.pack('>I', 10)
-            correlation_id = struct.pack('>I', 7)
+            correlation_id = 7.to_bytes(4, byteorder="big")
+            message_length = len(correlation_id).to_bytes(4, byteorder="big")
 
             response = message_length + correlation_id
             clientsocket.sendall(response)
@@ -25,3 +25,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
