@@ -5,6 +5,7 @@ import struct
 def handle_client(clientsocket):
     with clientsocket:
         data = clientsocket.recv(1024)
+        print(data)
         if data:
             correlation_id = int(7).to_bytes(4, byteorder="big")
             message_length = len(correlation_id).to_bytes(4, byteorder="big")
