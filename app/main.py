@@ -29,7 +29,7 @@ def handle_client(clientsocket):
                 response += int(0).to_bytes(2, byteorder="big")
             
             print(f"response: {response}") 
-            response += int(1).to_bytes(4, byteorder="big")
+            response += int(2).to_bytes(1, byteorder="big")
             response += request_api_key.to_bytes(2, byteorder="big")
             response += request_api_version.to_bytes(2, byteorder="big")
             response += request_api_version.to_bytes(2, byteorder="big")
