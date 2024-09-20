@@ -56,7 +56,7 @@ Fetch Response (Version: 16) => throttle_time_ms error_code session_id [response
 """
 
 
-def prepare_body_for_fetch(request_api_version):
+def prepare_body_for_fetch(data):
     body = b""
     body += int(0).to_bytes(4, byteorder="big") # throttle
     body += int(0).to_bytes(2, byteorder="big") # error code 
@@ -65,6 +65,32 @@ def prepare_body_for_fetch(request_api_version):
     body += int(0).to_bytes(1, byteorder="big") # tag buffer
 
     return body
+
+"""
+Fetch Request (Version: 16) => max_wait_ms min_bytes max_bytes isolation_level session_id session_epoch [topics] [forgotten_topics_data] rack_id TAG_BUFFER 
+  max_wait_ms => INT32
+  min_bytes => INT32
+  max_bytes => INT32
+  isolation_level => INT8
+  session_id => INT32
+  session_epoch => INT32
+  topics => topic_id [partitions] TAG_BUFFER 
+    topic_id => UUID
+    partitions => partition current_leader_epoch fetch_offset last_fetched_epoch log_start_offset partition_max_bytes TAG_BUFFER 
+      partition => INT32
+      current_leader_epoch => INT32
+      fetch_offset => INT64
+      last_fetched_epoch => INT32
+      log_start_offset => INT64
+      partition_max_bytes => INT32
+  forgotten_topics_data => topic_id [partitions] TAG_BUFFER 
+    topic_id => UUID
+    partitions => INT32
+  rack_id => COMPACT_STRING
+"""
+def parse_fetch_request(data):
+    num_topics = int.from_bytes(data[25], byteorder="big")
+    print(num_topics)
 
 
 def handle_client(clientsocket, addr):
