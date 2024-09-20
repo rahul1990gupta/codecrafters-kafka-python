@@ -30,8 +30,8 @@ def handle_client(clientsocket):
             
             print(f"response: {response}") 
             response += request_api_key.to_bytes(2, byteorder="big")
-            response += request_api_version.to_bytes(2, byteorder="big")
-            response += request_api_version.to_bytes(2, byteorder="big")
+            # response += request_api_version.to_bytes(2, byteorder="big")
+            # response += request_api_version.to_bytes(2, byteorder="big")
             response += int(123).to_bytes(4, byteorder="big")
 
             print(f"response: {response}") 
