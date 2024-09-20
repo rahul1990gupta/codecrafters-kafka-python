@@ -35,11 +35,11 @@ def handle_client(clientsocket, addr):
             response += request_api_key.to_bytes(2, byteorder="big")
             response += request_api_version.to_bytes(2, byteorder="big")
             response += request_api_version.to_bytes(2, byteorder="big")
+            response += int(0).to_bytes(2, byteorder="big") # tag buffer
 
             response += int(1).to_bytes(2, byteorder="big")
             response += int(16).to_bytes(2, byteorder="big")
             response += int(16).to_bytes(2, byteorder="big")
-            
             response += int(0).to_bytes(2, byteorder="big") # tag buffer
             
             response += int(0).to_bytes(4, byteorder="big") # throttle
