@@ -6,8 +6,13 @@ def handle_client(clientsocket):
     with clientsocket:
         data = clientsocket.recv(1024)
         print(data)
+        mlen = int.from_bytes(data[:4], byteorder="big") # 4 bytes
+        request_api_key = int.from_bytes(data[4:6], byteorder="big") # 2 bytes
+        request_api_version = int.from_bytes(data[6:8], byteorder="big") # 2 bytes
+        correlation_id = int.from_bytes(data[8:12], byteorder="big") # 4 bytes
+
+
         if data:
-            correlation_id = int(7).to_bytes(4, byteorder="big")
             message_length = len(correlation_id).to_bytes(4, byteorder="big")
 
             response = message_length + correlation_id
