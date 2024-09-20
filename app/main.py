@@ -15,7 +15,7 @@ def handle_client(clientsocket):
                 f"request_api_version: {request_api_version}\n" +
                 f"correlation_id: {correlation_id}")
         if data:
-            correlation_id = s[8:12]
+            correlation_id = correlation_id.to_bytes(4, byteorder="big")
             message_length = len(correlation_id).to_bytes(4, byteorder="big")
 
             response = message_length + correlation_id
