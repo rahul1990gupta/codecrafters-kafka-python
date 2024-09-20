@@ -17,7 +17,6 @@ def handle_client(clientsocket):
         if data:
             correlation_id = correlation_id.to_bytes(4, byteorder="big")
             print(f"correlation_id: {correlation_id}")
-            print(f"s[8:12] {s[8:12]}") 
             message_length = len(correlation_id).to_bytes(4, byteorder="big")
 
             response = message_length + correlation_id
