@@ -43,6 +43,7 @@ def handle_client(clientsocket, addr):
             response += int(0).to_bytes(2, byteorder="big") # tag buffer
             
             response += int(0).to_bytes(4, byteorder="big") # throttle
+            response += int(0).to_bytes(2, byteorder="big") # tag buffer
 
             print(f"response: {response}") 
             message_length = len(response).to_bytes(4, byteorder="big")
