@@ -15,7 +15,7 @@ def main():
         print(f"connect by {address}")
         data = clientsocket.recv(1024)
         if data:
-            correlation_id = 7.to_bytes(4, byteorder="big")
+            correlation_id = int(7).to_bytes(4, byteorder="big")
             message_length = len(correlation_id).to_bytes(4, byteorder="big")
 
             response = message_length + correlation_id
