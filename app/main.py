@@ -44,16 +44,6 @@ def handle_client(clientsocket):
             clientsocket.sendall(response)
 
 
-"""
-ApiVersions Response (Version: 0) => error_code [api_keys] 
-  error_code => INT16
-  api_keys => api_key min_version max_version 
-    api_key => INT16
-    min_version => INT16
-    max_version => INT16
-"""
-
-
 def main():
     # You can use print statements as follows for debugging,
     # they'll be visible when running tests.
