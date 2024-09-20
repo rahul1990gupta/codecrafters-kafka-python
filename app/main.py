@@ -11,9 +11,9 @@ def handle_client(clientsocket):
         request_api_version = int.from_bytes(data[6:8], byteorder="big") # 2 bytes
         correlation_id = int.from_bytes(data[8:12], byteorder="big") # 4 bytes
     
-        print(f"""message_length: {mlen} \n request_api_key: {request_api_key} \n 
-                request_api_version: {request_api_version}\n correlation_id: {correlation_id}
-                """
+        print(f"message_length: {mlen} \n request_api_key: {request_api_key} \n" +
+                f"request_api_version: {request_api_version}\n" +
+                f"correlation_id: {correlation_id}")
         if data:
             correlation_id = s[8:12]
             message_length = len(correlation_id).to_bytes(4, byteorder="big")
