@@ -10,7 +10,7 @@ def prepare_header(correlation_id):
     pass
 
 def prepare_body_for_apiversion(request_api_version):
-    response = ""
+    response = b""
 
     if request_api_version not in SUPPORTED_VERSIONS:
         response += ERROR_CODE_UNSUPPORTED_VERSION.to_bytes(2, byteorder="big")
