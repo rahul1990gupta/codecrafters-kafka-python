@@ -90,7 +90,7 @@ Fetch Request (Version: 16) => max_wait_ms min_bytes max_bytes isolation_level s
   rack_id => COMPACT_STRING
 """
 def parse_fetch_request(data):
-    num_topics = int.from_bytes(data[25], byteorder="big")
+    num_topics = int.from_bytes(data[26:27], byteorder="big")
     print(num_topics)
 
 
@@ -116,7 +116,7 @@ def handle_client(clientsocket, addr):
         if request_api_key == 18: # api version
             body = prepare_body_for_apiversion(request_api_version)
         if request_api_key == 1: # fetch
-            body = prepare_body_for_fetch(request_api_version)
+            body = prepare_body_for_fetch(data)
         
         print(f"header: {header}")
 
