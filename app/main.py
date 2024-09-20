@@ -15,7 +15,7 @@ def main():
         print(f"connect by {address}")
         data = clientsocket.recv(1024)
         if data:
-            message_length = struck.pack('>I', 10)
+            message_length = struct.pack('>I', 10)
             correlation_id = struct.pack('>I', 7)
 
             response = message_length + correlation_id
