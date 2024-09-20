@@ -74,7 +74,7 @@ def prepare_body_for_fetch(data):
     body += int(0).to_bytes(8, byteorder="big") # log start offset
     body += int(0).to_bytes(1, byteorder="big") # num aborted transactions
     body += int(0).to_bytes(4, byteorder="big") # preferred read replica 
-    body += int(0).to_bytes(0, byteorder="big") # num records 
+    body += int(0).to_bytes(1, byteorder="big") # num records 
 
     body += int(0).to_bytes(1, byteorder="big") # tag buffer
     body += int(0).to_bytes(1, byteorder="big") # tag buffer
