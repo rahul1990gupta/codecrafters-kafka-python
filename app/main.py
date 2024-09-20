@@ -9,7 +9,7 @@ ERROR_CODE_UNSUPPORTED_VERSION = 35  # Error code for unsupported version
 def prepare_header(correlation_id):
     pass
 
-def prepare_body_for_apiversion():
+def prepare_body_for_apiversion(request_api_version):
     response = ""
 
     if request_api_version not in SUPPORTED_VERSIONS:
@@ -51,7 +51,7 @@ def handle_client(clientsocket, addr):
             correlation_id = correlation_id.to_bytes(4, byteorder="big")
             print(f"correlation_id: {correlation_id}")
 
-            response = correlation_id + prepare_body_for_apiversion()
+            response = correlation_id + prepare_body_for_apiversion(request_api_version)
 
             print(f"response: {response}") 
             message_length = len(response).to_bytes(4, byteorder="big")
