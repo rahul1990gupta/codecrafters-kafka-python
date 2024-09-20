@@ -2,6 +2,9 @@ import socket  # noqa: F401
 import struct
 
 
+SUPPORTED_VERSIONS = {0, 1, 2, 3, 4}
+ERROR_CODE_UNSUPPORTED_VERSION = 35  # Error code for unsupported version
+
 def handle_client(clientsocket):
     with clientsocket:
         data = clientsocket.recv(1024)
@@ -20,6 +23,8 @@ def handle_client(clientsocket):
             message_length = len(correlation_id).to_bytes(4, byteorder="big")
 
             response = message_length + correlation_id
+            if request_api_version not in SUPPORTED_VERSIONS:
+                response += ERROR_CODE_UNSUPPORTED_VERSION.to_bytes(4, byteorder="big")
             print(f"response sent: {response}")
             clientsocket.sendall(response)
 
