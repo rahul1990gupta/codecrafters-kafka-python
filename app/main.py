@@ -78,7 +78,7 @@ def prepare_body_for_fetch(data):
 
     body += int(0).to_bytes(1, byteorder="big") # tag buffer
     body += int(0).to_bytes(1, byteorder="big") # tag buffer
-    body += int(0).to_bytes(1, byteorder="big") # tag buffer
+    # body += int(0).to_bytes(1, byteorder="big") # tag buffer
 
     return body
 
