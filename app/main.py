@@ -65,7 +65,7 @@ def prepare_body_for_fetch(data):
     body += int(0).to_bytes(4, byteorder="big") # session_id  
     body += int(2).to_bytes(1, byteorder="big") # num responses 
     body += topic_id
-    body += int(2).to_bytes(1, byteorder="big") # num partitions 
+    body += int(0).to_bytes(1, byteorder="big") # num partitions 
     body += int(0).to_bytes(1, byteorder="big") # tag buffer
 
     return body
