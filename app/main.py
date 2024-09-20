@@ -1,6 +1,7 @@
 import socket  # noqa: F401
 import struct
 import threading
+import uuid
 
 
 SUPPORTED_VERSIONS = {0, 1, 2, 3, 4}
