@@ -59,7 +59,7 @@ Fetch Response (Version: 16) => throttle_time_ms error_code session_id [response
 def prepare_body_for_fetch(request_api_version):
     body = b""
     body += int(0).to_bytes(4, byteorder="big") # throttle
-    body += int(0).to_bytes(2 byteorder="big") # error code 
+    body += int(0).to_bytes(2, byteorder="big") # error code 
     body += int(0).to_bytes(4, byteorder="big") # session_id  
     body += int(0).to_bytes(4, byteorder="big") # num responses  
     body += int(0).to_bytes(1, byteorder="big") # tag buffer
