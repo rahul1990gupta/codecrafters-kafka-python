@@ -23,9 +23,8 @@ def handle_client(clientsocket):
 
             response = correlation_id
             if request_api_version not in SUPPORTED_VERSIONS:
-                response = ERROR_CODE_UNSUPPORTED_VERSION.to_bytes(4, byteorder="big")
-                print(f"response sent: {response}")
-                clientsocket.sendall(response)
+                response += ERROR_CODE_UNSUPPORTED_VERSION.to_bytes(2, byteorder="big")
+            
 
             message_length = len(response).to_bytes(4, byteorder="big")
             response = message_length + response
