@@ -6,6 +6,7 @@ import threading
 SUPPORTED_VERSIONS = {0, 1, 2, 3, 4}
 ERROR_CODE_UNSUPPORTED_VERSION = 35  # Error code for unsupported version
 
+
 def handle_client(clientsocket, addr):
     while True:
         data = clientsocket.recv(1024)
@@ -30,13 +31,18 @@ def handle_client(clientsocket, addr):
                 response += int(0).to_bytes(2, byteorder="big")
             
             print(f"response: {response}") 
-            response += int(2).to_bytes(1, byteorder="big") # num api keys
+            response += int(3).to_bytes(1, byteorder="big") # num api keys
             response += request_api_key.to_bytes(2, byteorder="big")
             response += request_api_version.to_bytes(2, byteorder="big")
             response += request_api_version.to_bytes(2, byteorder="big")
+
+            response += int(1).to_bytes(2, byteorder="big")
+            response += int(16).to_bytes(2, byteorder="big")
+            response += int(16).to_bytes(2, byteorder="big")
+            
             response += int(0).to_bytes(2, byteorder="big") # tag buffer
             
-            response += int(0).to_bytes(4, byteorder="big")
+            response += int(0).to_bytes(4, byteorder="big") # throttle
 
             print(f"response: {response}") 
             message_length = len(response).to_bytes(4, byteorder="big")
