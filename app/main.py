@@ -5,7 +5,7 @@ import struct
 SUPPORTED_VERSIONS = {0, 1, 2, 3, 4}
 ERROR_CODE_UNSUPPORTED_VERSION = 35  # Error code for unsupported version
 
-async def handle_client(clientsocket):
+def handle_client(clientsocket):
     while True:
         data = clientsocket.recv(1024)
         print(data)
@@ -57,8 +57,8 @@ def main():
         (clientsocket, address)  = server.accept() # wait for client
         if clientsocket:
             print(f"connect by {address}")
-            handle_client(clientsocket)
-
+            client_thread = threading.Thread(target=handle_client, args=(clientsocket))
+            client_thread.start()  # Start the thread
 
 if __name__ == "__main__":
     main()
