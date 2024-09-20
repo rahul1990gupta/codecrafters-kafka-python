@@ -57,12 +57,14 @@ Fetch Response (Version: 16) => throttle_time_ms error_code session_id [response
 
 
 def prepare_body_for_fetch(data):
-    parse_fetch_request(data)
+    topic_id = parse_fetch_request(data)
     body = b""
     body += int(0).to_bytes(4, byteorder="big") # throttle
     body += int(0).to_bytes(2, byteorder="big") # error code 
     body += int(0).to_bytes(4, byteorder="big") # session_id  
-    body += int(0).to_bytes(1, byteorder="big") # num responses  
+    body += int(2).to_bytes(1, byteorder="big") # num responses 
+    body += topic_id
+    body += int(2).to_bytes(1, byteorder="big") # num partitions 
     body += int(0).to_bytes(1, byteorder="big") # tag buffer
 
     return body
@@ -92,6 +94,10 @@ Fetch Request (Version: 16) => max_wait_ms min_bytes max_bytes isolation_level s
 def parse_fetch_request(data):
     num_topics = int.from_bytes(data[26:27], byteorder="big")
     print(num_topics)
+    topic_id = data[27: 27 + 16]
+    print(f"topic_id: {topic_id}, {uuid.UUID(bytes=topic_id)}")
+    return topic_id
+
 
 
 def handle_client(clientsocket, addr):
