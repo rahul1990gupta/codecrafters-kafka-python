@@ -27,9 +27,9 @@ def handle_client(clientsocket):
             
 
             message_length = len(response).to_bytes(4, byteorder="big")
-
+            response = message_length + response
             print(f"response sent: {response}")
-            clientsocket.sendall(message_length + response)
+            clientsocket.sendall(response)
 
 
 
