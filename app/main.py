@@ -29,9 +29,9 @@ def handle_client(clientsocket):
                 response += int(0).to_bytes(2, byteorder="big")
             
             print(f"response: {response}") 
-            response += request_api_key.to_bytes(2, byeorder="big")
-            response += request_api_version.to_bytes(2, byeorder="big")
-            response += request_api_version.to_bytes(2, byeorder="big")
+            response += request_api_key.to_bytes(2, byteorder="big")
+            response += request_api_version.to_bytes(2, byteorder="big")
+            response += request_api_version.to_bytes(2, byteorder="big")
 
             print(f"response: {response}") 
             message_length = len(response).to_bytes(4, byteorder="big")
