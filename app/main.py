@@ -6,6 +6,34 @@ import threading
 SUPPORTED_VERSIONS = {0, 1, 2, 3, 4}
 ERROR_CODE_UNSUPPORTED_VERSION = 35  # Error code for unsupported version
 
+def prepare_header(correlation_id):
+    pass
+
+def prepare_body_for_apiversion():
+    response = ""
+
+    if request_api_version not in SUPPORTED_VERSIONS:
+        response += ERROR_CODE_UNSUPPORTED_VERSION.to_bytes(2, byteorder="big")
+    else: 
+        response += int(0).to_bytes(2, byteorder="big")
+    
+    print(f"response: {response}") 
+    response += int(3).to_bytes(1, byteorder="big") # num api keys
+    response += int(18).to_bytes(2, byteorder="big")
+    response += int(4).to_bytes(2, byteorder="big")
+    response += int(4).to_bytes(2, byteorder="big")
+    response += int(0).to_bytes(1, byteorder="big") # tag buffer
+
+    response += int(1).to_bytes(2, byteorder="big")
+    response += int(16).to_bytes(2, byteorder="big")
+    response += int(16).to_bytes(2, byteorder="big")
+    response += int(0).to_bytes(1, byteorder="big") # tag buffer
+    
+    response += int(0).to_bytes(4, byteorder="big") # throttle
+    response += int(0).to_bytes(1, byteorder="big") # tag buffer
+    
+    return response
+
 
 def handle_client(clientsocket, addr):
     while True:
@@ -23,27 +51,7 @@ def handle_client(clientsocket, addr):
             correlation_id = correlation_id.to_bytes(4, byteorder="big")
             print(f"correlation_id: {correlation_id}")
 
-            response = correlation_id
-
-            if request_api_version not in SUPPORTED_VERSIONS:
-                response += ERROR_CODE_UNSUPPORTED_VERSION.to_bytes(2, byteorder="big")
-            else: 
-                response += int(0).to_bytes(2, byteorder="big")
-            
-            print(f"response: {response}") 
-            response += int(3).to_bytes(1, byteorder="big") # num api keys
-            response += request_api_key.to_bytes(2, byteorder="big")
-            response += request_api_version.to_bytes(2, byteorder="big")
-            response += request_api_version.to_bytes(2, byteorder="big")
-            response += int(0).to_bytes(1, byteorder="big") # tag buffer
-
-            response += int(1).to_bytes(2, byteorder="big")
-            response += int(16).to_bytes(2, byteorder="big")
-            response += int(16).to_bytes(2, byteorder="big")
-            response += int(0).to_bytes(1, byteorder="big") # tag buffer
-            
-            response += int(0).to_bytes(4, byteorder="big") # throttle
-            response += int(0).to_bytes(1, byteorder="big") # tag buffer
+            response = correlation_id + prepare_body_for_apiversion()
 
             print(f"response: {response}") 
             message_length = len(response).to_bytes(4, byteorder="big")
