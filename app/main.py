@@ -22,15 +22,31 @@ def handle_client(clientsocket):
             print(f"correlation_id: {correlation_id}")
 
             response = correlation_id
+
             if request_api_version not in SUPPORTED_VERSIONS:
                 response += ERROR_CODE_UNSUPPORTED_VERSION.to_bytes(2, byteorder="big")
+            else: 
+                response += int(0).to_bytes(2, byteorder="big")
             
+            response += request_api_key.to_bytes(2, byeorder="big")
+            response += request_api_version.to_bytes(2, byeorder="big")
+            response += request_api_version.to_bytes(2, byeorder="big")
 
+            
             message_length = len(response).to_bytes(4, byteorder="big")
             response = message_length + response
             print(f"response sent: {response}")
             clientsocket.sendall(response)
 
+
+"""
+ApiVersions Response (Version: 0) => error_code [api_keys] 
+  error_code => INT16
+  api_keys => api_key min_version max_version 
+    api_key => INT16
+    min_version => INT16
+    max_version => INT16
+"""
 
 
 def main():
