@@ -69,6 +69,12 @@ def prepare_body_for_fetch(data):
     
     body += int(0).to_bytes(4, byteorder="big") # partition_index 
     body += int(100).to_bytes(2, byteorder="big") # error code 
+    body += int(0).to_bytes(8, byteorder="big") # high watermark 
+    body += int(0).to_bytes(8, byteorder="big") # last stable offset
+    body += int(0).to_bytes(8, byteorder="big") # log start offset
+    body += int(0).to_bytes(1, byteorder="big") # num aborted transactions
+    body += int(0).to_bytes(4, byteorder="big") # preferred read replica 
+    body += int(0).to_bytes(1, byteorder="big") # num records 
 
     body += int(0).to_bytes(1, byteorder="big") # tag buffer
 
