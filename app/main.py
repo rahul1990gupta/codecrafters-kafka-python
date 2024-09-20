@@ -61,7 +61,7 @@ def prepare_body_for_fetch(request_api_version):
     body += int(0).to_bytes(4, byteorder="big") # throttle
     body += int(0).to_bytes(2, byteorder="big") # error code 
     body += int(0).to_bytes(4, byteorder="big") # session_id  
-    body += int(0).to_bytes(4, byteorder="big") # num responses  
+    body += int(0).to_bytes(1, byteorder="big") # num responses  
     body += int(0).to_bytes(1, byteorder="big") # tag buffer
 
     return body
