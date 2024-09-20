@@ -6,7 +6,7 @@ SUPPORTED_VERSIONS = {0, 1, 2, 3, 4}
 ERROR_CODE_UNSUPPORTED_VERSION = 35  # Error code for unsupported version
 
 def handle_client(clientsocket):
-    with clientsocket:
+    while True:
         data = clientsocket.recv(1024)
         print(data)
         mlen = int.from_bytes(data[:4], byteorder="big") # 4 bytes
